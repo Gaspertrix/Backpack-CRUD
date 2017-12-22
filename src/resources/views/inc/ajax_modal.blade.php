@@ -4,3 +4,12 @@
     <div class="modal-content"></div>
   </div>
 </div>
+
+@section('after_scripts')
+@parent
+<script type="text/javascript">
+  $(document).on('show.bs.modal', '.modal', function (event) {
+    modalInvoker = $(event.relatedTarget);
+  });
+</script>
+@endsection
