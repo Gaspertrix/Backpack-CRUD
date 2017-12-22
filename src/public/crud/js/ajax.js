@@ -1,4 +1,4 @@
-$(document).on('hidden.bs.modal', '.modal', function () {
+$(document).on('hidden.bs.modal', '.modal', function (event) {
     var modalData = $(this).data('bs.modal');
 
     if (modalData && modalData.options.remote) {
@@ -20,7 +20,43 @@ crudForm.submit(function(event) {
                     type: 'success'
                 });
 
-                $('#crudTable').dataTable().api().ajax.reload();
+                // Reload data table if it is present
+                if (jQuery.isFunction($('#crudTable').dataTable))
+                {
+                    $('#crudTable').dataTable().api().ajax.reload();
+                }
+
+                // Insert new item if it was added on the fly
+                if (modalInvoker && modalInvoker.data('field'))
+                {
+                    var formInvoker = modalInvoker.closest('form');
+                    var field = formInvoker.find('[name="' + modalInvoker.data('field') + '[]"]').length ?
+                                formInvoker.find('[name="' + modalInvoker.data('field') + '[]"]') :
+                                formInvoker.find('[name="' + modalInvoker.data('field') + '"]');
+
+                    var attribute = modalInvoker.data('attribute');
+                    var text = '';
+
+                    // If there are not translatable fields
+                    if (!response.language)
+                    {
+                        text = response.item[attribute];
+                    }
+                    else
+                    {
+                        // There are translatable fields, check if this field is translatable
+                        if (response.item[attribute][response.language])
+                        {
+                            text = response.item[attribute][response.language];
+                        }
+                        else
+                        {
+                            text = response.item[attribute];
+                        }
+                    }
+
+                    field.append($('<option>', {value: response.item[modalInvoker.data('key')], text: text}));
+                }
 
                 switch (saveActionField.val()) {
                     case 'save_and_new':
@@ -35,8 +71,15 @@ crudForm.submit(function(event) {
                         break;
                 }
             }
+            else
+            {
+                new PNotify({
+                    text: 'Unknow error',
+                    type: 'error'
+                });
+            }
         },
-        error: function(xhr, statusText, error) {
+        error: function(xhr, statusText, error, form) {
             if (xhr.status == 422)
             {
                 if (!$.isEmptyObject(xhr.responseJSON))
@@ -48,9 +91,9 @@ crudForm.submit(function(event) {
                                     return index === 0 ? item : '['+item+']';
                                 }).join('');
 
-                            var field = $('[name="' + normalizedProperty + '[]"]').length ?
-                                        $('[name="' + normalizedProperty + '[]"]') :
-                                        $('[name="' + normalizedProperty + '"]'),
+                            var field = form.find('[name="' + normalizedProperty + '[]"]').length ?
+                                        form.find('[name="' + normalizedProperty + '[]"]') :
+                                        form.find('[name="' + normalizedProperty + '"]'),
                                         container = field.parents('.form-group');
 
                             container.addClass('has-error');
@@ -81,6 +124,13 @@ crudForm.submit(function(event) {
                         type: 'error'
                     });
                 }
+            }
+            else
+            {
+                new PNotify({
+                    text: 'Unknow error',
+                    type: 'error'
+                });
             }
         }
     }); 
