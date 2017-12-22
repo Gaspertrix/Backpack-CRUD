@@ -127,10 +127,17 @@ class CrudController extends BaseController
         $redirectUrl = $this->performSaveAction($item->getKey());
 
         if ($request->ajax()) {
-            return response()->json([
+            $response = array(
                 'redirect_url' => $redirectUrl->getTargetUrl(),
                 'message' => $message,
-            ]);
+                'item' => $item,
+            );
+
+            if (method_exists($item, 'isTranslatableAttribute')) {
+                $response['language'] = app()->getLocale();
+            }
+
+            return response()->json($response);
         } else {
             // show a success message
             \Alert::success($message)->flash();
@@ -201,10 +208,17 @@ class CrudController extends BaseController
         $redirectUrl = $this->performSaveAction($item->getKey());
 
         if ($request->ajax()) {
-            return response()->json([
+            $response = array(
                 'redirect_url' => $redirectUrl->getTargetUrl(),
                 'message' => $message,
-            ]);
+                'item' => $item,
+            );
+
+            if (method_exists($item, 'isTranslatableAttribute')) {
+                $response['language'] = app()->getLocale();
+            }
+
+            return response()->json($response);
         } else {
             // show a success message
             \Alert::success($message)->flash();
