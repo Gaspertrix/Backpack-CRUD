@@ -16,6 +16,9 @@
 @endsection
 
 @section('content')
+@if ($crud->ajax_crud)
+	@include('crud::inc.ajax_modal')
+@endif
 <div class="row">
 	<div @if (!$request->ajax())class="col-md-8 col-md-offset-2"@endif>
 		<!-- Default box -->
