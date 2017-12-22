@@ -4,6 +4,7 @@
 
     <label>{!! $field['label'] !!}</label>
     @include('crud::inc.field_translatable_icon')
+    @include('crud::inc.field_ajax_crud')
 
     <?php $entity_model = $crud->model; ?>
     <select

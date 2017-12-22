@@ -2,6 +2,7 @@
 <div @include('crud::inc.field_wrapper_attributes') >
     <label>{!! $field['label'] !!}</label>
     @include('crud::inc.field_translatable_icon')
+    @include('crud::inc.field_ajax_crud')
     <select
         name="{{ $field['name'] }}[]"
         style="width: 100%"
