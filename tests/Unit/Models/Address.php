@@ -2,7 +2,7 @@
 
 namespace Backpack\CRUD\Tests\Unit\Models;
 
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
@@ -17,6 +17,6 @@ class Address extends Model
      */
     public function accountDetails()
     {
-        return $this->belongsTo('Backpack\CRUD\Tests\Unit\Models\AccountDetails');
+        return $this->belongsTo('Backpack\CRUD\Tests\Unit\Models\AccountDetails', 'account_details_id');
     }
 }

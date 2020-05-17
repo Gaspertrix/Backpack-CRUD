@@ -2,7 +2,7 @@
 
 namespace Backpack\CRUD\Tests\Unit\Models;
 
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class AccountDetails extends Model
@@ -23,5 +23,10 @@ class AccountDetails extends Model
     public function addresses()
     {
         return $this->hasMany('Backpack\CRUD\Tests\Unit\Models\Address');
+    }
+
+    public function getNicknameComposedAttribute()
+    {
+        return $this->nickname.'++';
     }
 }

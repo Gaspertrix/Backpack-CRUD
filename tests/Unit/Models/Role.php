@@ -2,7 +2,7 @@
 
 namespace Backpack\CRUD\Tests\Unit\Models;
 
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
@@ -18,5 +18,10 @@ class Role extends Model
     public function user()
     {
         return $this->belongsToMany('Backpack\CRUD\Tests\Unit\Models\User', 'user_role');
+    }
+
+    public function getRoleNameAttribute()
+    {
+        return $this->name.'++';
     }
 }

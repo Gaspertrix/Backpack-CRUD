@@ -1,6 +1,6 @@
 # Having trouble using Backpack?
 
-No documentation can be 100% complete and Backpack's is no different, sorry for that. There are plenty of people that follow [the StackOverflow tag "backpack-for-laravel"](stackoverflow.com/questions/tagged/backpack-for-laravel) and are glad to help you out. Post your question there and please include:
+No documentation can be 100% complete and Backpack's is no different, sorry for that. There are plenty of people that follow [the StackOverflow tag "backpack-for-laravel"](https://stackoverflow.com/questions/tagged/backpack-for-laravel) and are glad to help you out. Post your question there and please include:
 - (A) what you did
 - (B) what you expected to happen
 - (C) what happened
@@ -41,7 +41,6 @@ Thank you, thank you, thank you! You can:
 - [install Gitter](https://gitter.im/BackpackForLaravel/Lobby) and help people out in real-time;
 - [star Backpack\CRUD on Github](https://github.com/laravel-backpack/crud) so the repository can get more views;
 - [purchase a commercial license](https://www.backpackforlaravel.com/commercial-license/form), if you use Backpack to make money;
-- [stock up on cheaper commercial licenses](https://www.backpackforlaravel.com/commercial-license/form) before we bump the price to $39;
 - ALL OF THE ABOVE. Groundbreaking, I know, right? :-)
 
 **Happy coding**!

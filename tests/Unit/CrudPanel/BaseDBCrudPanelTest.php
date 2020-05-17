@@ -2,7 +2,7 @@
 
 namespace Backpack\CRUD\Tests\Unit\CrudPanel;
 
-use Backpack\CRUD\CrudPanel;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanel;
 use Orchestra\Database\ConsoleServiceProvider;
 
 abstract class BaseDBCrudPanelTest extends BaseCrudPanelTest
@@ -19,14 +19,14 @@ abstract class BaseDBCrudPanelTest extends BaseCrudPanelTest
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         // call migrations specific to our tests
         $this->loadMigrationsFrom([
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__.'/../../config/database/migrations'),
+            '--path' => realpath(__DIR__.'/../../config/database/migrations'),
         ]);
 
         $this->artisan('db:seed', ['--class' => 'UsersRolesTableSeeder']);
@@ -37,7 +37,7 @@ abstract class BaseDBCrudPanelTest extends BaseCrudPanelTest
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
      *
      * @return void
      */
@@ -49,7 +49,7 @@ abstract class BaseDBCrudPanelTest extends BaseCrudPanelTest
     /**
      * Get package providers.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
      *
      * @return array
      */
@@ -63,8 +63,8 @@ abstract class BaseDBCrudPanelTest extends BaseCrudPanelTest
     /**
      * Assert that the attributes of a model entry are equal to the expected array of attributes.
      *
-     * @param array $expected attributes
-     * @param \Illuminate\Database\Eloquent\Model $actual model
+     * @param array                               $expected attributes
+     * @param \Illuminate\Database\Eloquent\Model $actual   model
      */
     protected function assertEntryEquals($expected, $actual)
     {

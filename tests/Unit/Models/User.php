@@ -2,7 +2,7 @@
 
 namespace Backpack\CRUD\Tests\Unit\Models;
 
-use Backpack\CRUD\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
@@ -34,5 +34,10 @@ class User extends Model
     public function roles()
     {
         return $this->belongsToMany('Backpack\CRUD\Tests\Unit\Models\Role', 'user_role');
+    }
+
+    public function getNameComposedAttribute()
+    {
+        return $this->name.'++';
     }
 }
